@@ -1,0 +1,27 @@
+# dev file
+services:
+  postgres:
+    image: twentycrm/twenty-postgres-spilo:latest
+    container_name: twenty_pg1
+    environment:
+      - PGUSER_SUPERUSER=postgres
+      - PGPASSWORD_SUPERUSER=postgres
+      - ALLOW_NOSSL=true
+    ports:
+      - '127.0.0.1:5430:5432'
+    volumes:
+      - ./.db/twenty_db_data:/home/postgres/pgdata
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: twenty_redis1
+    ports:
+      - '127.0.0.1:6379:6379'
+
+volumes:
+  twenty_db_data:
