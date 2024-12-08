@@ -343,7 +343,7 @@
   },
   "license": "AGPL-3.0",
   "name": "twenty",
-  "packageManager": "yarn@4.4.0",
+  "packageManager": "yarn@4.5.3+sha256.dddc0b96ad2dca8d56a5302b56bf3cbf8210654474a6bf88877da61e866f3d46",
   "resolutions": {
     "graphql": "16.8.0",
     "type-fest": "4.10.1",

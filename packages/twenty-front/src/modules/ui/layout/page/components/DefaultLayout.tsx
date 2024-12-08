@@ -88,6 +88,7 @@ export const DefaultLayout = () => {
         `}
       />
       <StyledLayout>
+        test
         {!showAuthModal && (
           <>
             <ContextStoreComponentInstanceContext.Provider
@@ -105,7 +106,6 @@ export const DefaultLayout = () => {
             <KeyboardShortcutMenu />
           </>
         )}
-
         <StyledPageContainer
           animate={{
             marginLeft:
@@ -126,6 +126,7 @@ export const DefaultLayout = () => {
           ) : (
             <StyledAppNavigationDrawer />
           )}
+
           <StyledMainContainer>
             {showAuthModal ? (
               <>

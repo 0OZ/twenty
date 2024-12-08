@@ -1,5 +1,41 @@
 # dev file
 services:
+  change-vol-ownership:
+    image: ubuntu
+    user: root
+    volumes:
+      - ./.live/server-local-data:/tmp/server-local-data
+      - ./.live/docker-data:/tmp/docker-data
+    command: >
+      bash -c "
+      chown -R 1000:1000 /tmp/server-local-data
+      && chown -R 1000:1000 /tmp/docker-data"
+
+  kistr:
+    image: kistr-twenty
+    build: 
+      context: .  # Adjust this path relative to your project root
+      dockerfile: ./packages/twenty-docker/twenty/Dockerfile
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./.live/server-local-data:/app/packages/twenty-server/${STORAGE_LOCAL_PATH:-.local-storage}
+      - ./.live/docker-data:/app/docker-data  
+    healthcheck:
+      test: curl --fail http://localhost:3000/healthz
+      interval: 5s
+      timeout: 5s
+      retries: 10  
+    environment:
+       PG_DATABASE_URL: postgres://postgres:postgres@twenty_pg1:5432/default
+       REDIS_URL: redis://twenty_redis1:6379
+       FRONT_BASE_URL: https://kistr.hopper.sh
+       SERVER_URL: https://kistr.hopper.sh
+    depends_on:
+      change-vol-ownership:
+        condition: service_completed_successfully
+
+
   postgres:
     image: twentycrm/twenty-postgres-spilo:latest
     container_name: twenty_pg1
@@ -25,3 +61,7 @@ services:
 
 volumes:
   twenty_db_data:
+
+networks:
+  shared_ng:
+    name: shared_ng

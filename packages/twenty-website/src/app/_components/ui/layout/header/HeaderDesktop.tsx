@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { IconBook, IconChevronDown, IconRobotFace } from '@tabler/icons-react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ExternalArrow, GithubIcon } from '@/app/_components/ui/icons/SvgIcons';
 import { CallToAction } from '@/app/_components/ui/layout/header/callToAction';

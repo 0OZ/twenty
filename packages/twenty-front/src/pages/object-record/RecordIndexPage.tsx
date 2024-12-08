@@ -61,6 +61,7 @@ export const RecordIndexPage = () => {
     [],
   );
 
+  //main component
   return (
     <PageContainer>
       <RecordIndexRootPropsContext.Provider

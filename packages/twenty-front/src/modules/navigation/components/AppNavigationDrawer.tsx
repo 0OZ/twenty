@@ -25,6 +25,7 @@ export const AppNavigationDrawer = ({
   const isSettingsDrawer = useIsSettingsDrawer();
 
   const currentWorkspace = useRecoilValue(currentWorkspaceState);
+  // console.log('currentWorkspace', currentWorkspace);
   const [isAdvancedModeEnabled, setIsAdvancedModeEnabled] = useRecoilState(
     isAdvancedModeEnabledState,
   );
